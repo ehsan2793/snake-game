@@ -14,7 +14,6 @@ class Snake:
         self.create_snake()
         self.head = self.snake_parts[0]
         self.head.color('orange')
-        self.head.shape('circle')
 
     def create_snake(self):
         for position in STRING_POSITION:
@@ -29,6 +28,11 @@ class Snake:
             position = self.snake_parts[index - 1].position()
             self.snake_parts[index].setposition(position)
         self.head.forward(DISTANCE)
+
+    def add_to_tail(self):
+        pass
+
+
     def up(self):
         if self.head.heading() != DOWN:
             self.head.setheading(UP)
@@ -47,3 +51,5 @@ class Snake:
         b = random.randint(0, 255)
         self.head.color((r,g,b))
 
+    def position(self):
+        return self.head.position()
