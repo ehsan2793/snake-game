@@ -24,7 +24,6 @@ screen.onkey(snake.right, 'Right')
 screen.onkey(snake.change_color, 'c')
 game_is_on = True
 
-
 while game_is_on:
     screen.update()
     time.sleep(0.1)
@@ -35,13 +34,16 @@ while game_is_on:
         snake.extend_snake()
         score.add_to_score()
     # Detect collisions with wall
-    if (snake.head.xcor() > 280
-            or snake.head.xcor() < -280
+    if (snake.head.xcor() > 285
+            or snake.head.xcor() < -299
             or snake.head.ycor() < -280
-            or snake.head.ycor() > 280):
+            or snake.head.ycor() > 299):
         game_is_on = False
         score.game_over()
 
-        # todo: detect collisions with tail
+    for segment in snake.snake_parts[1:]:
+        if snake.head.distance(segment) < 10:
+            game_is_on = False
+            score.game_over()
 
 screen.exitonclick()
