@@ -27,16 +27,15 @@ class Snake:
         segment.penup()
         segment.setposition(position)
         self.snake_parts.append(segment)
+
     def extend_snake(self):
         self.add_new_part(self.snake_parts[-1].position())
-
 
     def move(self):
         for index in range(len(self.snake_parts) - 1, 0, -1):
             position = self.snake_parts[index - 1].position()
             self.snake_parts[index].setposition(position)
         self.head.forward(DISTANCE)
-
 
     def up(self):
         if self.head.heading() != DOWN:
@@ -62,3 +61,11 @@ class Snake:
 
     def position(self):
         return self.head.position()
+
+    def reset_snake(self):
+        for part in self.snake_parts:
+            part.setposition(900,900)
+        self.snake_parts.clear()
+        self.create_snake()
+        self.head = self.snake_parts[0]
+        self.head.color('orange')
